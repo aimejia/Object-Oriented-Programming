@@ -30,6 +30,5 @@ class RPG{
         float luck;
         float exp;
         int level;
-    #endif
-
 };
+#endif
