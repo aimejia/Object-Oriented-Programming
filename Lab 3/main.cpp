@@ -1,9 +1,10 @@
 #include <iostream>
 #include "RPG.h"
+#include "Game.h"
 using namespace std;
 
 int main(){
-    RPG p1 = RPG("Wiz", 0, 0.2, 60,1);
+    /*RPG p1 = RPG("Wiz", 0, 0.2, 60,1);
     RPG p2 = RPG();
 
     printf("%s Current Stats\n", p1.getName().c_str());
@@ -21,6 +22,14 @@ int main(){
 
     cout << p1.isAlive() << endl;
     cout << p2.isAlive() << endl;
+
+    return 0;*/
+    Game game;
+    int num_players = 10;
+
+    game.generatePlayers(num_players);
+    game.gameLoop();
+    game.printFinalResults();
 
     return 0;
 }

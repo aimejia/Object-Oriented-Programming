@@ -7,9 +7,6 @@
 using namespace std;
 
 class Game{
-    private:
-        vector<RPG*> players;
-        set<int> live_players;
     public:
         Game();
         ~Game();
@@ -19,6 +16,9 @@ class Game{
         void battleRound();
         void gameLoop();
         void printFinalResults();
+    private:
+        vector<RPG*> players;
+        set<int> live_players;
 };
 
 #endif
