@@ -1,4 +1,6 @@
 #include "RPG.h"
+#include <iostream>
+#include <random>
 RPG::RPG(){
     name = "NPC";
     hits_taken = 0;
@@ -16,6 +18,37 @@ RPG::RPG(string name, int hits_taken, float luck, float exp, int level){
 }
 RPG::~RPG(){
 }
+
+void RPG::setName(string name){
+    this->name = name;
+}
+
+void RPG::updateExpLevel() {
+    this->exp += 50.0;
+    if (this -> exp >= 100.0){
+        this->level += 1;
+        this->exp = 0.0;
+        this->luck += 0.1;
+    }
+}
+
+void RPG::attack(RPG* opponent){
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<double> dis(0.0, 1.0);
+    float random_num = dis(gen);
+    bool hit = random_num > (HIT_FACTOR * opponent->getLuck());
+    if (hit == true){
+        opponent->updateHitsTaken();
+    }
+}
+
+void RPG::printStats() {
+    string status = isAlive();
+    cout << "Name: " << name << "\nHits Taken: " << hits_taken << "\nLuck: " << luck << "\nExp: " << exp << "\nLevel: " << level << "\nStatus: " << status << endl;
+}
+
+
 string RPG::getName() const {
     return name;
 }
