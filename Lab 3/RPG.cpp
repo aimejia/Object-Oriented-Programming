@@ -1,6 +1,7 @@
 #include "RPG.h"
+#include<random>
 #include <iostream>
-#include <random>
+#include <iomanip>
 RPG::RPG(){
     name = "NPC";
     hits_taken = 0;
@@ -18,37 +19,6 @@ RPG::RPG(string name, int hits_taken, float luck, float exp, int level){
 }
 RPG::~RPG(){
 }
-
-void RPG::setName(string name){
-    this->name = name;
-}
-
-void RPG::updateExpLevel() {
-    this->exp += 50.0;
-    if (this -> exp >= 100.0){
-        this->level += 1;
-        this->exp = 0.0;
-        this->luck += 0.1;
-    }
-}
-
-void RPG::attack(RPG* opponent){
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_real_distribution<double> dis(0.0, 1.0);
-    float random_num = dis(gen);
-    bool hit = random_num > (HIT_FACTOR * opponent->getLuck());
-    if (hit == true){
-        opponent->updateHitsTaken();
-    }
-}
-
-void RPG::printStats() {
-    string status = isAlive();
-    cout << "Name: " << name << "\nHits Taken: " << hits_taken << "\nLuck: " << luck << "\nExp: " << exp << "\nLevel: " << level << "\nStatus: " << status << endl;
-}
-
-
 string RPG::getName() const {
     return name;
 }
@@ -76,4 +46,35 @@ bool RPG::isAlive() const{
     else{
         return false;
     }
+}
+
+void RPG::setName(string name){
+    this->name = name;
+}
+
+void RPG::updateExpLevel(){
+    exp += 50;
+
+    if (exp >= 100.0){
+        level++;
+        exp = 0;
+        luck += 0.1;
+    }
+}
+
+void RPG::attack(RPG* opponent){
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<double> dis(0.0, 1.0);
+
+    float random_num = dis(gen);
+    bool hit = random_num > HIT_FACTOR * opponent->getLuck();
+
+    if (hit == true) {
+        opponent->setHitsTaken(opponent->getHitsTaken() + 1);
+    }
+}
+
+void RPG::printStats() {
+    printf("Name: %s Hits Taken: %d Luck: %f Exp: %f Leve: %d Status: &s\n", name, hits_taken, luck, exp, level, isAlive() ? "Alive" : "Dead");
 }
