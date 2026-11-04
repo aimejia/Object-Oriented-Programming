@@ -1,11 +1,11 @@
 //Pokemon.h
-#ifndef RPG_H
-#define RPG_H
+#ifndef POKEMON_H
+#define POKEMON_H
 #include <string>
 #include <vector>
 using namespace std;
 class Pokemon{
-    private:
+    protected:
         string name;
         int hp;
         int attack;
@@ -13,8 +13,8 @@ class Pokemon{
         vector<string> type;
     public:
         Pokemon();
-        Pokemon::Pokemon(string name, int hp, int att, int def, vector<string> type);
-        ~Pokemon();
+        Pokemon(string name, int hp, int att, int def, vector<string> type);
+        //~Pokemon();
         void speak();
         void printStats();
 };

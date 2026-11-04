@@ -1,15 +1,16 @@
 //Charmander.h
-#ifndef RPG_H
-#define RPG_H
+#ifndef CHARMANDER_H
+#define CHARMANDER_h
 #include <string>
 #include <vector>
+#include "Pokemon.h"
 using namespace std;
-class Charmander{
+class Charmander : public Pokemon{
     private:
         vector<string> skills;
     public:
         Charmander();
-        Charmander(string name, int hp, int def, vector<string> skills);
+        Charmander(string name, int hp, int att, int def, vector<string> t, vector<string> s);
         //~Charmander();
         void speak();
         void printStats();
